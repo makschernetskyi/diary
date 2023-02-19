@@ -1,9 +1,11 @@
 from flask import Flask
 from flask_mysqldb import MySQL
 from flask_cors import CORS
+from flask_restful import Api
 
-from api import api, db
+
 from database import db, SQL_CONFIG
+from routes import initialize_routes
 
 
 
@@ -14,6 +16,8 @@ def create_app(config=None):
 	#Initialized the app
 
 	app = Flask(__name__, instance_relative_config=True)
+	api = Api(app)
+
 	cors = CORS(app, resources=r'/*')
 
 	app.config.update(SQL_CONFIG)
@@ -24,7 +28,7 @@ def create_app(config=None):
 
 	#registering a blueprint
 
-	app.register_blueprint(api)
+	initialize_routes(api)
 
 	@app.route('/')
 	def index():
