@@ -26,7 +26,7 @@ def create_app(config=None):
 
 	db.init_app(app)
 
-	#registering a blueprint
+	#initializing routes to api
 
 	initialize_routes(api)
 
