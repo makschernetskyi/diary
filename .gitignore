@@ -1,2 +1,6 @@
 server/__pycache__/
 server/venv/
+web_client/build/
+web_client/node_modules/
+web_client/rm_package-lock.ps1
+web_client/yarn-error.log

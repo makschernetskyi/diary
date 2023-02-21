@@ -3,7 +3,7 @@ from flask_api import status
 from flask_restful import Resource
 import json
 
-from database import db
+from api.database import db
 
 
 version = '0'

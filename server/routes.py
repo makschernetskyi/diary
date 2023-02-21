@@ -1,5 +1,4 @@
-from api import Notes_API, Note_API, version
-
+from api.api import Notes_API, Note_API, version
 
 
 
