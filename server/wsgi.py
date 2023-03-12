@@ -6,7 +6,9 @@ from pathlib import Path
 import os
 
 
+# from config import config
 from api.database import db, SQL_CONFIG
+# from api.api import login_manager
 from routes import initialize_routes
 
 from main.main import main
@@ -25,9 +27,12 @@ def create_app(config=None):
 	#Initialized the app
 
 	app = Flask(__name__, instance_relative_config=True, template_folder = TEMPLATE_DIR, static_folder = STATIC_DIR)
+	# print(config)
+	# app.config.update(config)
+
 	api = Api(app)
 
-	print('base_dir', BASE_DIR)
+	# login_manager.init_app(app)
 
 	cors = CORS(app, resources=r'/*')
 
