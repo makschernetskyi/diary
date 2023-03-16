@@ -6,6 +6,8 @@ import jwt
 import json
 import hashlib
 import datetime
+from functools import wraps
+import traceback
 
 from api.database import db
 from config import config
@@ -15,8 +17,68 @@ from config import config
 
 version = '0'
 
+
+
+
+def token_required(f):
+	@wraps(f)
+	def decorator(*args, **kwargs):
+
+		token = None
+
+		if 'x-access-tokens' in request.headers:
+			token = request.headers['x-access-tokens']
+
+		if not token:
+			return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
+
+		try:
+
+			token_data = jwt.decode(token, config['SECRET_KEY'], algorithms = "HS256")
+			cur = db.connection.cursor()
+			cur.execute(f'''SELECT id FROM user WHERE id={token_data['public_id']};''')
+			raw_data = cur.fetchall()
+			db.connection.commit()
+			cur.close()
+			data = json.dumps(raw_data)
+			current_user = ''.join(list(data[0][0]))
+		except:
+			traceback.print_exc()
+			return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
+
+		return f(*args, **kwargs)
+	return decorator
+
+
+class Auth_API(Resource):
+	def post(self):
+
+		if not 'password' in request.form or not request.form['password']:
+			return Response('incorrect login data', status=status.HTTP_401_UNAUTHORIZED)
+		password = request.form['password']
+		hash = hashlib.new('sha256')
+		hash.update(bytes(password, 'utf-8'))
+		password_hash = str(hash.hexdigest())
+
+		cur = db.connection.cursor()
+		cur.execute('''SELECT password_hash FROM user WHERE id=1;''')
+		raw_data = cur.fetchall()
+		data = json.dumps(raw_data)
+		db.connection.commit()
+		cur.close()
+		user_password_hash = ''.join(list(raw_data[0][0]))
+		if password_hash == user_password_hash:
+			print("hehe got u")
+			token = jwt.encode({'public_id': '1', 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=20)}, config['SECRET_KEY'], algorithm="HS256")
+			return jsonify({'token' : token})
+		print("hehe got u")
+		return Response('incorrect login data', status=status.HTTP_401_UNAUTHORIZED)
+
+
+
 class Notes_API(Resource):
 
+	@token_required
 	def get(self):
 		cur = db.connection.cursor()
 		cur.execute('''SELECT * FROM note;''')
@@ -25,6 +87,7 @@ class Notes_API(Resource):
 		cur.close()
 		return Response(data, mimetype="application/json", status=status.HTTP_200_OK)
 
+	@token_required
 	def post(self):
 
 		data = request.form.to_dict()
@@ -47,7 +110,7 @@ class Notes_API(Resource):
 
 
 class Note_API(Resource):
-
+	@token_required
 	def get(self,id):
 		cur = db.connection.cursor()
 		cur.execute(f'''SELECT * FROM note WHERE id = {id};''')
@@ -57,7 +120,7 @@ class Note_API(Resource):
 		cur.close()
 		return Response(data, mimetype='application/json', status=status.HTTP_200_OK)
 
-
+	@token_required
 	def put(self,id):
 
 		data = request.form.to_dict()
@@ -73,74 +136,6 @@ class Note_API(Resource):
 
 
 
-
-
-
-# class Auth_API(Resource):
-# 	def post(self):
-# 		# print('hello')
-# 		password = request.form['password']
-# 		hash = hashlib.new('sha256')
-# 		hash.update(bytes(password, 'utf-8'))
-# 		password_hash = str(hash.hexdigest())
-
-# 		cur = db.connection.cursor()
-# 		cur.execute('''SELECT password_hash FROM user WHERE id=1;''')
-# 		raw_data = cur.fetchall()
-# 		data = json.dumps(raw_data)
-# 		db.connection.commit()
-# 		cur.close()
-# 		user = User()
-# 		user.id = 1
-# 		users_password = ''.join(list(raw_data[0][0]))
-# 		if password_hash == users_password:
-# 			login_user(user)
-# 			return Response('logged in', mimetype='application/json', status=status.HTTP_200_OK)
-
-# 		return Response('Unauthorized', mimetype='application/json', status=status.HTTP_401_UNAUTHORIZED)
-
-# 	@login_required
-# 	def put(self):
-# 		logout_user()
-# 		return 'Logged out', 200
-
-	# def put(self):
-	# 	password = request.form['password']
-	# 	hash = hashlib.new('sha256')
-	# 	hash.update(bytes(password, 'utf-8'))
-	# 	password_hash = str(hash.hexdigest())
-	# 	print(password, password_hash)
-
-	# 	cur = db.connection.cursor()
-	# 	cur.execute(f'''INSERT INTO user (id, password_hash) VALUES(1, '{password_hash}'); ''')
-	# 	db.connection.commit()
-	# 	cur.close()
-	# 	return Response('', status=status.HTTP_200_OK)
-
-
-class Auth_API(Resource):
-	def post(self):
-
-		if not 'password' in request.form or not request.form['password']:
-			return Response('incorrect login data', status=status.HTTP_401_UNAUTHORIZED)
-		password = request.form['password']
-		hash = hashlib.new('sha256')
-		hash.update(bytes(password, 'utf-8'))
-		password_hash = str(hash.hexdigest())
-
-		cur = db.connection.cursor()
-		cur.execute('''SELECT password_hash FROM user WHERE id=1;''')
-		raw_data = cur.fetchall()
-		data = json.dumps(raw_data)
-		db.connection.commit()
-		cur.close()
-		user_password_hash = ''.join(list(raw_data[0][0]))
-		if password_hash == user_password_hash:
-			print("hehe got u")
-			token = jwt.encode({'public_id': 'admin', 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=20)}, config['SECRET_KEY'], algorithm="HS256")
-			return jsonify({'token' : jwt.decode(token, config['SECRET_KEY'], algorithms="HS256")})
-		print("hehe got u")
-		return Response('incorrect login data', status=status.HTTP_401_UNAUTHORIZED)
 
 
 
