@@ -17,6 +17,7 @@ const rerenderEntireTree = () =>{
 				<App/>
 			</React.StrictMode>
 		</Provider>
+		
 	);
 }
 

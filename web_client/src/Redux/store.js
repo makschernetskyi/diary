@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { indexReducer } from './reducers/indexReducer';
+import { loginReducer } from './slices/login/loginSlice';
 
 
 const reducer = {
-	index: indexReducer
+	login: loginReducer
 };
 
 

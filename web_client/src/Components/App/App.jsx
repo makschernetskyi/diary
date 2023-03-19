@@ -10,7 +10,7 @@ export const App = () => {
 		<div className={styles.App}>
 			<Router>
 				<Routes>
-					<Route path="/" element={"hello router"}/>
+					<Route path="/" element={"hello index"}/>
 					<Route exact path="/login" element={
 						<Login/>
 					}/>
