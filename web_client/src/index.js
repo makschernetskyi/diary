@@ -13,9 +13,7 @@ const root = createRoot(document.getElementById('root'))
 const rerenderEntireTree = () =>{
 	root.render(
 		<Provider store = { store }>
-			<React.StrictMode>
 				<App/>
-			</React.StrictMode>
 		</Provider>
 		
 	);
