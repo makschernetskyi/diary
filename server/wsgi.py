@@ -3,15 +3,17 @@ from flask_mysqldb import MySQL
 from flask_cors import CORS
 from flask_restful import Api
 from pathlib import Path
+from flask_migrate import Migrate
 import os
 
 
 # from config import config
-from api.database import db, SQL_CONFIG
+from db import db, SQL_CONFIG
 # from api.api import login_manager
 from routes import initialize_routes
 
 from main.main import main
+import models
 
 
 
@@ -41,6 +43,7 @@ def create_app(config=None):
 	#Created and initialized the MySQL database
 
 	db.init_app(app)
+	migrate = Migrate(app,db)
 
 	#initializing routes to api
 
