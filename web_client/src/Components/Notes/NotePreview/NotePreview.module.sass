@@ -1,0 +1,44 @@
+.NotePreview
+	display: grid
+	aspect-ratio: 1 / 1
+	background: #fdf07a
+	height: 25vh
+	position: relative
+	grid-template-rows: 1fr 9fr
+	padding: 1em
+	overflow: hidden
+
+.Corner_first
+	width: 0px
+	height: 0px
+	display: block
+	box-sizing: unset
+	border-top: 3em solid transparent
+	border-bottom: 3em solid transparent
+	border-right: 3em solid transparent
+	border-left: 3em solid white
+	position: absolute
+	right: -3em
+	bottom: -3em
+	transform: rotate(45deg)
+
+.Corner_second
+	width: 0px
+	height: 0px
+	display: block
+	box-sizing: unset
+	border-top: 3em solid transparent
+	border-bottom: 3em solid transparent
+	border-right: 3em solid transparent
+	border-left: 3em solid orange
+	position: absolute
+	right: 1.2em
+	bottom: 1.2em
+	transform: rotate(225deg)
+
+.NotePreview > h3
+	font-size: 10px
+
+.NotePreview
+	p
+		font-size: 15px

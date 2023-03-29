@@ -13,7 +13,6 @@ export const attemptLogin = createAsyncThunk(
 	'login/attempt',
 	async (params, {rejectWithValue}) => {
 		const {password, source} = params
-		console.log(password)
 		try{
 			const requestData = new FormData();
 			requestData.append('password', password)
@@ -27,7 +26,6 @@ export const attemptLogin = createAsyncThunk(
 			if(response.status !== 200){
 				throw new Error('serverError')
 			}
-			console.log(response)
 			return response.data.token
 		}
 		catch(err){

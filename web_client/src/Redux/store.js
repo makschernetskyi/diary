@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { homeReducer } from './slices/homeSlice';
+import { homeReducer } from './slices/home/homeSlice';
 import { loginReducer } from './slices/login/loginSlice';
+import { notesReducer } from './slices/notes/notesSlice';
 
 
 
 const reducer = {
 	login: loginReducer,
-	home: homeReducer
+	home: homeReducer,
+	notes: notesReducer
 };
 
 

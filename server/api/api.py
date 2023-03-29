@@ -51,7 +51,6 @@ def token_required(f):
 		try:
 
 			token_data = jwt.decode(token, config['SECRET_KEY'], algorithms = "HS256")
-			print(token_data)
 			try:
 				user = db.get_or_404(User, token_data['public_id'])
 			except:
@@ -60,7 +59,6 @@ def token_required(f):
 			traceback.print_exc()
 			return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
 
-		print(TokenBlacklist.query.filter_by(token=token).first())
 		if TokenBlacklist.query.filter_by(token=token).first():
 			return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
 
