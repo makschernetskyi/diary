@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import { Login } from '../Login';
 import { Home } from '../Home'
+import { Notes } from '../Notes';
 
 
 export const App = () => {
@@ -12,8 +13,11 @@ export const App = () => {
 		{/*<div className={styles.App}></div>*/}
 			<Router>
 				<Routes>
-					<Route path="/" element={
+					<Route exact path="/" element={
 						<Home/>
+					}/>
+					<Route path="/notes" element={
+						<Notes></Notes>
 					}/>
 					<Route exact path="/login" element={
 						<Login/>

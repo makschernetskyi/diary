@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import { fetchLastNote } from '../../Redux/slices/homeSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import styles from './Home.module.sass'
 
 
+
 export const Home = () => {
 	const {lastNote, error} = useSelector(state=> state.home);
 	const dispatch = useDispatch();
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const source = axios.CancelToken.source()
@@ -26,11 +28,15 @@ export const Home = () => {
 		}
 	},[error])
 
+	const handleCalendarClick = () => {
+		navigate('/notes')
+	}
+
 
 
 	return (
 		<div className={styles.HomePage}>
-			<div className={styles.Calendar}>
+			<div className={styles.Calendar} onClick = {handleCalendarClick}>
 				Calendar template
 			</div>
 			<article className={styles.LastNote}>
