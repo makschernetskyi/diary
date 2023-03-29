@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './App.module.sass'
+//import styles from './App.module.sass'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import { Login } from '../Login';
@@ -8,7 +8,8 @@ import { Home } from '../Home'
 
 export const App = () => {
 	return (
-		<div className={styles.App}>
+		<>
+		{/*<div className={styles.App}></div>*/}
 			<Router>
 				<Routes>
 					<Route path="/" element={
@@ -20,6 +21,7 @@ export const App = () => {
 					<Route path="*" element={"4o4 Not Found"}/>
 				</Routes>
 			</Router>
-		</div>
+		{/*</div>*/}	
+		</>
 	);
 }

@@ -51,6 +51,7 @@ def token_required(f):
 		try:
 
 			token_data = jwt.decode(token, config['SECRET_KEY'], algorithms = "HS256")
+			print(token_data)
 			try:
 				user = db.get_or_404(User, token_data['public_id'])
 			except:
@@ -59,7 +60,8 @@ def token_required(f):
 			traceback.print_exc()
 			return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
 
-		if TokenBlacklist.query.filter_by(token=token):
+		print(TokenBlacklist.query.filter_by(token=token).first())
+		if TokenBlacklist.query.filter_by(token=token).first():
 			return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
 
 		return f(*args, **kwargs)
@@ -145,7 +147,7 @@ class Notes_API(Resource):
 		notes = None
 		try:
 
-			notes = list(map(lambda note: note.__dict__, Note.query.all()))
+			notes = list(map(lambda note: note.__dict__, Note.query.order_by(Note.date).all()))
 			for note in notes:
 				note.pop('_sa_instance_state')
 				note['date'] = str(note['date'])

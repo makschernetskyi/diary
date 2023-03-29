@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { fetchLastNote } from '../../Redux/slices/homeSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import styles from './Home.module.sass'
 
 
 export const Home = () => {
 	const {lastNote, error} = useSelector(state=> state.home);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 
 	useEffect(() => {
 		const source = axios.CancelToken.source()
@@ -21,15 +22,21 @@ export const Home = () => {
 
 	useEffect(()=>{
 		if(error==="unauthorized"){
-			navigate('/login')
+			window.location = '/login'
 		}
 	},[error])
 
 
 
 	return (
-		<div>
-			{JSON.stringify(lastNote)}
+		<div className={styles.HomePage}>
+			<div className={styles.Calendar}>
+				Calendar template
+			</div>
+			<article className={styles.LastNote}>
+				<h2>{lastNote?.date}</h2>
+				<p>{lastNote?.text}</p>
+			</article>
 		</div>
 	);
 }

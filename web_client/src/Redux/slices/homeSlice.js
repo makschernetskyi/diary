@@ -18,7 +18,7 @@ export const fetchLastNote = createAsyncThunk(
 				method: 'get',
 				cancelToken: source.token
 			})
-			return response.data
+			return response.data[0]
 		}
 		catch(err){
 			if (err.response.status === 401){
