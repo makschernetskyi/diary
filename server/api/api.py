@@ -84,7 +84,6 @@ class Auth_API(Resource):
 			return Response('user not found', status=status.HTTP_404_NOT_FOUND)
 
 		if password_hash == user.password_hash:
-			#print("hehe got u")
 			token = jwt.encode({'public_id': '1', 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=20)}, config['SECRET_KEY'], algorithm="HS256")
 			res = Response('success', status=status.HTTP_200_OK)
 			res.set_cookie('x-access-tokens', value=token, httponly=True)
@@ -160,7 +159,7 @@ class Notes_API(Resource):
 
 		req_data = request.form.to_dict()
 		if not "text" in req_data or not "date" in req_data:
-			return Response('note not found', status=status.HTTP_400_BAD_REQUEST)
+			return Response('bad request', status=status.HTTP_400_BAD_REQUEST)
 		text = req_data['text']
 		date = req_data['date']
 		try:

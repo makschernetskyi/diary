@@ -12,7 +12,6 @@ export const fetchNotes = createAsyncThunk(
 				method: 'get',
 				cancelToken: source.token
 			})
-			console.log(response)
 			return response.data
 		}
 		catch(err){

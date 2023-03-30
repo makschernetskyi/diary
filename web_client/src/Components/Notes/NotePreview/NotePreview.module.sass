@@ -5,40 +5,57 @@
 	height: 25vh
 	position: relative
 	grid-template-rows: 1fr 9fr
-	padding: 1em
+	padding: 2vh
 	overflow: hidden
+	cursor: pointer
+	transition: all .2
+	
+
+.NotePreview:hover
+	box-shadow: -9px -7px 10px -3px rgba(60,83,114,0.57)
 
 .Corner_first
 	width: 0px
 	height: 0px
 	display: block
 	box-sizing: unset
-	border-top: 3em solid transparent
-	border-bottom: 3em solid transparent
-	border-right: 3em solid transparent
-	border-left: 3em solid white
+	border-top: 6vh solid transparent
+	border-bottom: 6vh solid transparent
+	border-right: 6vh solid transparent
+	border-left: 6vh solid white
 	position: absolute
-	right: -3em
-	bottom: -3em
+	right: -6vh
+	bottom: -6vh
 	transform: rotate(45deg)
+	cursor: default
 
 .Corner_second
 	width: 0px
 	height: 0px
 	display: block
 	box-sizing: unset
-	border-top: 3em solid transparent
-	border-bottom: 3em solid transparent
-	border-right: 3em solid transparent
-	border-left: 3em solid orange
+	border-top: 6vh solid transparent
+	border-bottom: 6vh solid transparent
+	border-right: 6vh solid transparent
+	border-left: 6vh solid orange
 	position: absolute
-	right: 1.2em
-	bottom: 1.2em
+	right: 2.4vh
+	bottom: 2.4vh
 	transform: rotate(225deg)
 
-.NotePreview > h3
-	font-size: 10px
+.NotePreview 
+	h3
+		font-size: 2vh
 
 .NotePreview
 	p
 		font-size: 15px
+	.textPlaceHolder
+		width: 20vh
+		height: 2vh
+		background: orange
+		margin-top: 2vh
+	.headerPlaceHolder
+		width: 15vh
+		height: 2vh
+		background: #aaa

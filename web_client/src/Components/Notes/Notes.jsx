@@ -30,12 +30,66 @@ export const Notes = () => {
 	}, [error])
 
 
+	const getPreparedDateFromNote = (note) =>{
+		const date = new Date(Date.parse(note.date));
+		date.setHours(0)
+		date.setMinutes(0)
+		date.setSeconds(0)
+		date.setMilliseconds(0)
+		return JSON.stringify(date)
+	}
+
+	const groupArray = (originalArr, prepFunc) =>{
+		const result = []
+		let last = null
+		const arr = [...originalArr]
+		arr.sort((a,b)=>{
+			const prop_value_a = prepFunc(a)
+			const prop_value_b = prepFunc(b)
+			if (prop_value_a < prop_value_b)
+				return -1;
+			return 0;
+		})
+		
+		
+		arr.forEach(e=>{
+			if (prepFunc(e) != last){
+				result.push([e])
+				last = prepFunc(e)
+			}else{
+				result[result.length-1].push(e)
+			}
+		})
+		return result
+	}
+
+	const generateNotesSection = (groupOfNotes, key) =>{
+		const notesList = []
+		for(let note of groupOfNotes){
+			notesList.push(<NotePreview key={note.id} date={note.date} text ={note.text} location={note.location}/>)
+		}
+		return(
+			<div className={styles.NotesPage_NotesSection} key={key}>
+				{notesList}
+			</div>
+		)
+	}
+	const generateNotesSections = (notesList)=>{
+		const groupedNotesData = groupArray(notesList, getPreparedDateFromNote)
+		const sections = []
+		let key = 0
+		for(let group of groupedNotesData){
+			sections.push(generateNotesSection(group,key))
+			sections.push(<hr key={Math.ceil(Math.random()*1000)}/>)
+			key++;
+		}
+		return sections
+	}
+
+
 	return(
 		<div className={styles.NotesPage}>
-			<div className={styles.NotesPage_NotesPerDay}>
-				<NotePreview data={notesList.length ? notesList[0] : {}}/>
-			</div>
-			
+			{generateNotesSections(notesList)}
 		</div>
 	)
 }
