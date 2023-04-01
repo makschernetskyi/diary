@@ -1,10 +1,11 @@
-
+$bg-color: #FFFCF1
+$note-bg: #fdf07a
 
 	
 	
 .HomePage
 	height: calc(100% - 5vh)
-	background: white
+	background: $bg-color
 	display: grid
 	grid-template-columns: 1fr 4fr 1fr 4fr 1fr
 	grid-template-rows: 1fr 6fr 1fr
@@ -26,7 +27,8 @@
 
 .LastNote
 	display: block
-	background: #fdf07a
+	background: $note-bg
+	position: relative
 	padding: 2em
 	grid-column: 4/5
 	grid-row: 2/4
@@ -41,5 +43,37 @@
 		-webkit-line-clamp: 5
 	> h2
 		font-family: Verdana
+
+.Corner_first
+	width: 0
+	height: 0
+	display: flex
+	box-sizing: unset
+	border-top: 3em solid transparent
+	border-bottom: 3em solid transparent
+	border-right: 3em solid transparent
+	border-left: 3em solid $bg-color
+	position: absolute
+	background: orange
+	top: -3em
+	right: -3em
+	z-index: 2
+	transform: rotate(-45deg)
+	cursor: default
+
+.Corner_second
+	width: 0
+	height: 0
+	display: flex
+	box-sizing: unset
+	border-top: 3em solid transparent
+	border-bottom: 3em solid transparent
+	border-right: 3em solid transparent
+	border-left: 3em solid orange
+	position: absolute
+	top: 1.2em
+	right: 1.2em
+	z-index:3
+	transform: rotate(135deg)
 
 	

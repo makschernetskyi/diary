@@ -1,8 +1,16 @@
+$bg-color: #FFFCF1
+	
+	
 .Header
 	height: 5vh
+	background: $bg-color
 	width: 100%
 	display: grid
 	grid-template-columns: 5vh 5vh 1fr 5vh 5vh
+	-webkit-user-select: none 
+	-moz-user-select: none    
+	-ms-user-select: none      
+	user-select: none
 
 .Header_title
 	grid-column: 3/4
@@ -28,3 +36,17 @@
 	color: black
 	text-decoration: none
 	font: 20px Verdana
+
+.Header_back
+	all: unset
+	cursor: pointer
+	grid-column: 1/2
+	display: flex
+	justify-content: center
+	align-items: center
+	color: black
+	text-decoration: none
+	font: 20px Verdana
+
+.hidden
+	display: none

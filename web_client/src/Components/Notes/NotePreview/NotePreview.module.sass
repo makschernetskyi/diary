@@ -1,7 +1,11 @@
+$bg-color: #FFFCF1
+$note-bg: #fdf07a
+
+
 .NotePreview
 	display: grid
 	aspect-ratio: 1 / 1
-	background: #fdf07a
+	background: $note-bg
 	height: 25vh
 	position: relative
 	grid-template-rows: 1fr 9fr
@@ -23,7 +27,7 @@
 	border-top: 6vh solid transparent
 	border-bottom: 6vh solid transparent
 	border-right: 6vh solid transparent
-	border-left: 6vh solid white
+	border-left: 6vh solid $bg-color
 	position: absolute
 	right: -6vh
 	bottom: -6vh

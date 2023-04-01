@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { fetchNote } from '../../Redux/slices/note/noteSlice';
+import { fetchNote, resetState } from '../../Redux/slices/note/noteSlice';
 
+import { Header } from '../Header'
 import styles from './Note.module.sass'
 
 
@@ -25,6 +26,7 @@ export const Note = () => {
   
     return ()=>{
 			source.cancel()
+      dispatch(resetState())
 		}
   }, [dispatch])
 
@@ -36,11 +38,10 @@ export const Note = () => {
   
 
   return (
+    <>
+    <Header backUrl='/notes'></Header>
     <div className={styles.Note}>
       <div className={styles.Note_Header}>
-        <Link to='/notes' className={styles.Note_Header_back}>
-          {'<'}
-        </Link>
         <h2 className={styles.Note_Header_date}>
           {note?.date.slice(0,16)}
         </h2>
@@ -55,5 +56,6 @@ export const Note = () => {
         {note?.text}
       </div>
     </div>
+    </>
   )
 }

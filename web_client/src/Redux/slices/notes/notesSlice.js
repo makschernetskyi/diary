@@ -35,7 +35,7 @@ const initialState = {
 const notesSlice = createSlice({
 	name: "notes",
 	initialState,
-	reducer:{},
+	reducers:{},
 	extraReducers: builder=>{
 		const {pending, fulfilled, rejected} = fetchNotes
 		builder

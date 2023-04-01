@@ -32,7 +32,11 @@ const initialState = {
 const noteSlice = createSlice({
 	name: 'note',
 	initialState,
-	reducer:{},
+	reducers:{
+		resetState: ()=>{
+			return initialState
+		}
+	},
 	extraReducers: builder =>{
 		const {pending, fulfilled, rejected} = fetchNote
 		builder
@@ -49,5 +53,7 @@ const noteSlice = createSlice({
 		})
 	}
 })
+
+export const {resetState} = noteSlice.actions;
 
 export const noteReducer = noteSlice.reducer

@@ -46,8 +46,11 @@ export const Home = () => {
 			<article className={styles.LastNote}>
 				<h2>{lastNote?.date.slice(0,16)}</h2>
 				<p>
+					&emsp;
 					{lastNote?.text}	
 				</p>
+				<span className={styles.Corner_first}/>
+				<span className={styles.Corner_second}/>
 			</article>
 		</div>
 		</>

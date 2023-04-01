@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from './Notes.module.sass'
 import { fetchNotes } from '../../Redux/slices/notes/notesSlice';
 import { NotePreview } from './NotePreview';
+import { Header } from '../Header';
 
 
 
@@ -94,9 +95,12 @@ export const Notes = () => {
 
 
 	return(
+		<>
+		<Header backUrl='/'/>
 		<div className={styles.NotesPage}>
 			{React.Children.toArray(generateNotesSections(notesList))}
 		</div>
+		</>
 	)
 }
 
