@@ -182,8 +182,10 @@ class Note_API(Resource):
 			note = db.get_or_404(Note, id)
 		except:
 			return Response('note not found', status=status.HTTP_404_NOT_FOUND)
-		data = json.dumps(note)
-		return Response(data, mimetype="application/json", status=status.HTTP_200_OK)
+		data = note.__dict__
+		data.pop('_sa_instance_state')
+		data['date'] = str(data['date'])
+		return Response(json.dumps(data), mimetype="application/json", status=status.HTTP_200_OK)
 
 	@token_required
 	def put(self,id):

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import styles from './NotePreview.module.sass'
 
@@ -35,12 +36,12 @@ export const NotePreview = props => {
 
 	return(
 		<>
-			<article className={styles.NotePreview}>
-				{getPlaceHolderOrHeader(props.date)}
+			<Link to={`/note/${props.id}`} className={styles.NotePreview}>
+				{getPlaceHolderOrHeader(props.date.slice(0,16))}
 				{getPlaceHolderOrText(props.text)}
 				<span className={styles.Corner_first}></span>
 				<span className={styles.Corner_second}></span>
-			</article>
+			</Link>
 		</>
 	)
 }

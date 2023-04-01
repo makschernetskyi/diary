@@ -1,1 +1,1 @@
-export {Notes} from './Notes.jsx'
+export { Notes } from './Notes.jsx'

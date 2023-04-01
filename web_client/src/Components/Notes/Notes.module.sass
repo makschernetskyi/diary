@@ -12,4 +12,35 @@
 	flex-flow: row wrap
 	> *
 		margin-left: 2em
-		margin-top: 2em
+		margin-top: 1em
+
+.NotesPage_SectionHeader
+	display: grid
+	height: 2em
+	grid-template-columns: 1fr 5fr 21fr
+	margin-top: 1em
+
+@media only screen and (max-width: 1000px)
+	.NotesPage_SectionHeader
+		grid-template-columns: 1fr 10fr 1fr
+
+.NotesPage_SectionHeader_date
+	grid-column: 2/3
+	text-align: center
+	overflow: hidden
+	height: 2em
+	white-space: nowrap
+	font: 2vw
+
+
+
+
+
+.separator
+	width: 90%
+	display: flex
+	align-self: center
+	justify-self: center
+	height: 10%
+	background: #666
+	border-radius: 100px

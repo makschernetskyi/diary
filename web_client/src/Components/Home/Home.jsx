@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import { Header } from '../Header';
+
 import styles from './Home.module.sass'
 
 
@@ -35,6 +37,8 @@ export const Home = () => {
 
 
 	return (
+		<>
+		<Header/>
 		<div className={styles.HomePage}>
 			<div className={styles.Calendar} onClick = {handleCalendarClick}>
 				Calendar template
@@ -46,5 +50,6 @@ export const Home = () => {
 				</p>
 			</article>
 		</div>
+		</>
 	);
 }

@@ -63,25 +63,31 @@ export const Notes = () => {
 		return result
 	}
 
-	const generateNotesSection = (groupOfNotes, key) =>{
+	const generateNotesSection = (groupOfNotes) =>{
 		const notesList = []
 		for(let note of groupOfNotes){
-			notesList.push(<NotePreview key={note.id} date={note.date} text ={note.text} location={note.location}/>)
+			notesList.push(<NotePreview id={note.id} date={note.date} text ={note.text} location={note.location}/>)
 		}
 		return(
-			<div className={styles.NotesPage_NotesSection} key={key}>
-				{notesList}
+			<>
+			<div className={styles.NotesPage_SectionHeader}>
+				<div className={styles.separator}/>
+				<h2 className={styles.NotesPage_SectionHeader_date}>
+					{groupOfNotes[0].date.slice(0,10)}
+				</h2>
+				<div className={styles.separator}/>
 			</div>
+			<div className={styles.NotesPage_NotesSection}>
+				{React.Children.toArray(notesList)}
+			</div>
+			</>
 		)
 	}
 	const generateNotesSections = (notesList)=>{
 		const groupedNotesData = groupArray(notesList, getPreparedDateFromNote)
 		const sections = []
-		let key = 0
 		for(let group of groupedNotesData){
-			sections.push(generateNotesSection(group,key))
-			sections.push(<hr key={Math.ceil(Math.random()*1000)}/>)
-			key++;
+			sections.push(generateNotesSection(group))
 		}
 		return sections
 	}
@@ -89,7 +95,7 @@ export const Notes = () => {
 
 	return(
 		<div className={styles.NotesPage}>
-			{generateNotesSections(notesList)}
+			{React.Children.toArray(generateNotesSections(notesList))}
 		</div>
 	)
 }
