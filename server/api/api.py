@@ -161,7 +161,12 @@ class Notes_API(Resource):
 		if not "text" in req_data or not "date" in req_data:
 			return Response('bad request', status=status.HTTP_400_BAD_REQUEST)
 		text = req_data['text']
-		date = req_data['date']
+		date = None
+		if hasattr(request.headers, 'datetime_format') and request.headers.datetime_format == "ISO":
+			date = str(datetime.datetime.fromisoformat(req_data['date']))
+			print('KONICHIWA')
+		else:
+			date = req_data['date']
 		try:
 			session = db.session()
 			session.add(Note(text,date))
