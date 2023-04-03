@@ -18,7 +18,7 @@ export const AddNote = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {date, text, location, error} = useSelector(state=>state.addNote)
+  const {date, text, location, error, status} = useSelector(state=>state.addNote)
   
   const handleSubmit = () =>{
     const source = axios.CancelToken.source()
@@ -47,6 +47,15 @@ export const AddNote = () => {
       dispatch(resetState())
     }
   },[error])
+
+  useEffect(()=>{
+    if(status=="resolved"){
+      navigate('/notes')
+    }
+    return ()=>{
+      dispatch(resetState())
+    }
+  },[status])
 
 
 

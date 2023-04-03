@@ -21,10 +21,29 @@ export const fetchNote = createAsyncThunk('fetchNote',
 	}
 )
 
+export const deleteNote = createAsyncThunk('deleteNote',
+	async (noteId, {rejectWithValue})=>{
+		try{
+			const response = await axios({
+				url: `/api/v0/note/${noteId}`,
+				method: 'delete',
+			})
+			return response.data
+		}
+		catch(err){
+			if (err.response.status === 401){
+				return rejectWithValue('unauthorized')
+			}
+			return rejectWithValue(err.message)
+		}
+	}
+)
+
 const initialState = {
 	note: null,
 	status: null,
-	error: null
+	error: null,
+	deleted: false
 }
 
 
@@ -51,6 +70,21 @@ const noteSlice = createSlice({
 			state.status = "rejected"
 			state.error = action.payload
 		})
+
+		builder
+		.addCase(deleteNote.pending, (state)=>{
+			state.status = "pending";
+		})
+		.addCase(deleteNote.fulfilled, (state)=>{
+			state.status = "resolved";
+			state.deleted = true
+		})
+		.addCase(deleteNote.rejected, (state, action)=>{
+			state.status = "rejected"
+			state.error = action.payload
+		})
+
+		
 	}
 })
 

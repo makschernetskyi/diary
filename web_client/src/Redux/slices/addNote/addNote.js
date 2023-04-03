@@ -17,14 +17,18 @@ export const postNote = createAsyncThunk(
 		try{
 			const requestData = new FormData();
 			requestData.append('date', new Date(Date.parse(date)).toISOString())
-			if (location)
+			if (location){
 				requestData.append('location', location)
+			}
 			requestData.append('text', text)
 
 			const response = await axios({
 				url: '/api/v0/notes',
 				method: 'post',
-				headers: { "Content-Type": "multipart/form-data", "datetime_format": "ISO" },
+				headers: { 
+					"Content-Type": "multipart/form-data",
+					'Datetime-Format': "ISO" 
+				},
 				data: requestData,
 				cancelToken: source.token
 			})
