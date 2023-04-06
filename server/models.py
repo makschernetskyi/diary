@@ -30,7 +30,7 @@ class TokenBlacklist(db.Model):
 	__tablename__ = "TokenBlacklist"
 
 	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	token = db.Column(db.String(100), unique=True, nullable=False)
+	token = db.Column(db.String(150), unique=True, nullable=False)
 
 	def __init__(self,token):
 		self.token = token

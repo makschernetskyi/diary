@@ -2,8 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
+const initialTime = new Date(Date.now()-new Date(Date.now()).getTimezoneOffset()*60*1000).toISOString()
+
 const initialState = {
-	date: new Date(Date.now()).toISOString(),
+	date: initialTime,
 	location: '',
 	text: '',
 	status: null,
@@ -16,6 +18,7 @@ export const postNote = createAsyncThunk(
 		const {date, location, text ,source} = params
 		try{
 			const requestData = new FormData();
+			console.log(new Date(Date.parse(date)).toISOString())
 			requestData.append('date', new Date(Date.parse(date)).toISOString())
 			if (location){
 				requestData.append('location', location)
@@ -54,7 +57,7 @@ export const addNoteSlice = createSlice({
 	initialState,
 	reducers:{
 		updateDate: (state, action) => {
-			state.date = new Date(Date.parse(action.payload)).toISOString()
+			state.date = action.payload
 			console.log(state.date)
 			return state
 		},

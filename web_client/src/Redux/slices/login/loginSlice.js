@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export const attemptLogin = createAsyncThunk(
-	'login/attempt',
+	'login/attemptLogin',
 	async (params, {rejectWithValue}) => {
 		const {password, source} = params
 		try{
@@ -35,6 +35,7 @@ export const attemptLogin = createAsyncThunk(
 	}
 
 );
+
 
 
 export const loginSlice = createSlice({

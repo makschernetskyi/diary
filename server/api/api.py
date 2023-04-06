@@ -120,11 +120,15 @@ class Auth_API(Resource):
 				user = db.get_or_404(User, token_data['public_id'])
 			except:
 				return Response('user not found', status=status.HTTP_404_NOT_FOUND)
-			if token_data['exp'] > datetime.datetime.utcnow():
+			exp_date = datetime.datetime(1970,1,1) + datetime.timedelta(seconds=token_data['exp'])
+			if exp_date > datetime.datetime.utcnow():
 				session = db.session()
 				session.add(TokenBlacklist(token))
 				session.commit()
-		except:
+		except Exception as exc:
+			if(type(exc).__name__ == "ExpiredSignatureError" ):
+				return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
+			traceback.print_exc()
 			return Response('server error', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 		res = Response('logged out', status=status.HTTP_200_OK)

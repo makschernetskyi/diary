@@ -3,7 +3,7 @@ import { homeReducer } from './slices/home/homeSlice';
 import { loginReducer } from './slices/login/loginSlice';
 import { notesReducer } from './slices/notes/notesSlice';
 import { noteReducer } from './slices/note/noteSlice';
-import { addNoteReducer } from './slices/addNote/addNote';
+import { addNoteReducer } from './slices/addNote/addNoteSlice';
 
 
 

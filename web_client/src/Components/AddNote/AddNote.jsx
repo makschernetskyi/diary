@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { Header } from '../Header'
 import styles from './AddNote.module.sass'
 import { useDispatch, useSelector } from 'react-redux';
-import { postNote, resetState, updateDate, updateLocation, updateText } from '../../Redux/slices/addNote/addNote';
+import { postNote, resetState, updateDate, updateLocation, updateText } from '../../Redux/slices/addNote/addNoteSlice';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -64,7 +64,7 @@ export const AddNote = () => {
     <Header backUrl='/notes'></Header>
     <div className={styles.AddNote}>
       <div className={styles.AddNote_Header}> 
-        <input type="datetime-local" className={styles.AddNote_Header_date} ref={dateInputRef} value={date.slice(0,16)} onChange={handleDateInput}/>
+        <input type="datetime-local" className={styles.AddNote_Header_date} ref={dateInputRef} value={date} onChange={handleDateInput}/>
         <input type="text" placeholder="location..." className={styles.AddNote_Header_location} ref = {locationInputRef} value={location} onChange={handleLocationInput}/>
         <button className={styles.AddNote_Header_save} onClick={handleSubmit}>save</button>
       </div>
