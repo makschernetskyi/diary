@@ -2,10 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-const initialTime = new Date(Date.now()-new Date(Date.now()).getTimezoneOffset()*60*1000).toISOString()
-
+const initialTime = (new Date(Date.now()-new Date(Date.now()).getTimezoneOffset()*60*1000)).toISOString()
 const initialState = {
-	date: initialTime,
+	date: initialTime.slice(0,16),
 	location: '',
 	text: '',
 	status: null,
