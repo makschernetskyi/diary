@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { Header } from '../Header';
+import { Calendar } from './Calendar';
 
 import styles from './Home.module.sass'
+
 
 
 
@@ -40,9 +42,10 @@ export const Home = () => {
 		<>
 		<Header/>
 		<div className={styles.HomePage}>
-			<div className={styles.Calendar} onClick = {handleCalendarClick}>
+			{/*<div className={styles.Calendar} onClick = {handleCalendarClick}>
 				Calendar template
-			</div>
+			</div>*/}
+			<Calendar/>
 			<article className={styles.LastNote}>
 				<h2>{lastNote?.date.slice(0,16)}</h2>
 				<p>

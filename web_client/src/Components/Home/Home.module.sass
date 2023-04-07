@@ -1,5 +1,7 @@
 $bg-color: #FFFCF1
 $note-bg: #fdf07a
+$content-font: "AmaticSC-Bold"
+$note-header-font: "Rubik"
 
 	
 	
@@ -17,13 +19,13 @@ $note-bg: #fdf07a
 	align-items: center
 	grid-column: 2/3
 	grid-row: 2/3
-	border: 2px solid black
+	border: 5px solid black
 	cursor: pointer
-	font-family: Verdana
+	font-family: $content-font
 	transition: all .1s
 
 .Calendar:hover
-	border: 2px dotted red
+	border: 5px dotted red
 
 .LastNote
 	display: block
@@ -35,14 +37,14 @@ $note-bg: #fdf07a
 	overflow: hidden
 	> p	
 		padding-top: 2em
-		font-size: 30px
-		font-family: Alkatra
+		font-size: 40px
+		font-family: $content-font
 		display: -webkit-box
 		overflow: hidden
 		-webkit-box-orient: vertical
 		-webkit-line-clamp: 5
 	> h2
-		font-family: Verdana
+		font-family: $note-header-font
 
 .Corner_first
 	width: 0

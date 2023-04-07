@@ -37,7 +37,7 @@ export const NotePreview = props => {
 	return(
 		<>
 			<Link to={`/note/${props.id}`} className={styles.NotePreview}>
-				{getPlaceHolderOrHeader(props.date.slice(0,16))}
+				{getPlaceHolderOrHeader(props.date.slice(11,16))}
 				{getPlaceHolderOrText(props.text)}
 				<span className={styles.Corner_first}></span>
 				<span className={styles.Corner_second}></span>

@@ -1,5 +1,7 @@
 $bg-color: #FFFCF1
 $note-bg: #fdf07a
+$content-font: "AmaticSC-Bold"
+$note-header-font: "Rubik"
 
 
 .AddNote
@@ -24,7 +26,7 @@ $note-bg: #fdf07a
 	grid-column: 2/3
 	padding-left: 1em
 	font-size: 20px
-	font-family: Verdana
+	font-family: $note-header-font
 	outline: none
 	border: none
 	border-bottom: 2px solid #333
@@ -40,7 +42,7 @@ $note-bg: #fdf07a
 	white-space: nowrap
 	padding-left: 1em
 	font-size: 20px
-	font-family: Verdana
+	font-family: $note-header-font
 	outline: none
 	border: none
 	border-bottom: 2px solid #333
@@ -49,7 +51,8 @@ $note-bg: #fdf07a
 
 .AddNote_Content
 	background: $note-bg
-	font: 30px Alkatra
+	font: 40px $content-font
+	letter-spacing: 2px
 	padding: 2em
 	display: flex
 	height: 87vh
