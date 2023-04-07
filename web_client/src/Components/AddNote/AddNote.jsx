@@ -68,7 +68,7 @@ export const AddNote = () => {
         <input type="text" placeholder="location..." className={styles.AddNote_Header_location} ref = {locationInputRef} value={location} onChange={handleLocationInput}/>
         <button className={styles.AddNote_Header_save} onClick={handleSubmit}>save</button>
       </div>
-      <textarea value={text} onChange={handleTextInput} className={styles.AddNote_Content} ref={contentInputRef} placeholder='my new note...'>
+      <textarea value={text} onChange={handleTextInput} className={styles.AddNote_Content} ref={contentInputRef} placeholder='my new note...' autoFocus>
       </textarea>
     </div>
     </>

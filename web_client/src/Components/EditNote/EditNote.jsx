@@ -7,6 +7,7 @@ import { updateNote, resetState, updateDate, updateLocation, updateText } from '
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchNote } from '../../Redux/slices/editNote/editNoteSlice';
+import { Error } from '../ErrorModal';
 
 
 
@@ -84,9 +85,10 @@ export const EditNote = () => {
         <input type="text" placeholder="location..." className={styles.AddNote_Header_location} ref = {locationInputRef} value={location} onChange={handleLocationInput}/>
         <button className={styles.AddNote_Header_save} onClick={handleSubmit}>save</button>
       </div>
-      <textarea value={text} onChange={handleTextInput} className={styles.AddNote_Content} ref={contentInputRef} placeholder='my new note...'>
+      <textarea value={text} onChange={handleTextInput} className={styles.AddNote_Content} ref={contentInputRef} placeholder='my new note...' autoFocus>
       </textarea>
     </div>
+    <Error message={error}/>
     </>
   )
 }
