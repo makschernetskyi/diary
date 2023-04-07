@@ -4,6 +4,7 @@ import { loginReducer } from './slices/login/loginSlice';
 import { notesReducer } from './slices/notes/notesSlice';
 import { noteReducer } from './slices/note/noteSlice';
 import { addNoteReducer } from './slices/addNote/addNoteSlice';
+import { editNoteReducer } from './slices/editNote/editNoteSlice';
 
 
 
@@ -12,7 +13,8 @@ const reducer = {
 	home: homeReducer,
 	notes: notesReducer,
 	note: noteReducer,
-	addNote: addNoteReducer
+	addNote: addNoteReducer,
+	editNote: editNoteReducer
 };
 
 

@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 
-export const fetchNote = createAsyncThunk('fetchNote',
+export const fetchNote = createAsyncThunk(
+	'note/fetchNote',
 	async (reqData, {rejectWithValue})=>{
 		try{
 			const response = await axios({

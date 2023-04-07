@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { deleteNote, fetchNote, resetState } from '../../Redux/slices/note/noteSlice';
@@ -62,7 +62,7 @@ export const Note = () => {
         <h2 className={styles.Note_Header_location}>
           {note?.location || "unknown location"}
         </h2>
-        <button className={styles.Note_Header_edit}>edit</button>
+        <Link to={`/editNote/${note?.id}`} className={styles.Note_Header_edit}>edit</Link>
         <button className={styles.Note_Header_delete} onClick={handleDelete}>del</button>
       </div>
       <div className={styles.Note_Content}>

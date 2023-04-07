@@ -6,6 +6,7 @@ import { Home } from '../Home'
 import { Notes } from '../Notes';
 import { Note } from '../Note';
 import { AddNote } from '../AddNote';
+import { EditNote } from '../EditNote';
 
 
 export const App = () => {
@@ -24,6 +25,9 @@ export const App = () => {
 					}/>
 					<Route exact path="/newNote" element={
 						<AddNote/>
+					}/>
+					<Route exact path="/editNote/*" element={
+						<EditNote/>
 					}/>
 					<Route exact path="/note/*" element={
 						<Note/>

@@ -126,7 +126,7 @@ class Auth_API(Resource):
 				session.add(TokenBlacklist(token))
 				session.commit()
 		except Exception as exc:
-			if(type(exc).__name__ == "ExpiredSignatureError" ):
+			if type(exc).__name__ == "ExpiredSignatureError" :
 				return Response('unauthorized', status=status.HTTP_401_UNAUTHORIZED)
 			traceback.print_exc()
 			return Response('server error', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -207,12 +207,20 @@ class Note_API(Resource):
 		if not "text" in req_data or not "date" in req_data:
 			return Response('note not found', status=status.HTTP_400_BAD_REQUEST)
 		text = req_data['text']
-		date = req_data['date']
+
+		if 'Datetime-Format' in request.headers and request.headers['Datetime-Format'] == "ISO":
+			date = str(datetime.datetime.fromisoformat(req_data['date']))
+
+		else:
+			date = req_data['date']
 
 		try:
 			Note.query.filter_by(id=id).update(dict(text=text, date=date))
 			db.session.commit()
-		except:
+		except Exception as Exc:
+			if type(Exc).__name__ == "OperationalError":
+				Response('incorrect data', status=status.HTTP_400_BAD_REQUEST)
+			traceback.print_exc()
 			return Response('note not found', status=status.HTTP_404_NOT_FOUND)
 
 
