@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { fetchLastNote } from '../../Redux/slices/home/homeSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { Header } from '../Header';
@@ -32,21 +32,14 @@ export const Home = () => {
 		}
 	},[error])
 
-	const handleCalendarClick = () => {
-		navigate('/notes')
-	}
-
 
 
 	return (
 		<>
 		<Header/>
 		<div className={styles.HomePage}>
-			{/*<div className={styles.Calendar} onClick = {handleCalendarClick}>
-				Calendar template
-			</div>*/}
 			<Calendar/>
-			<article className={styles.LastNote}>
+			<Link to={`/note/${lastNote?.id}`} className={styles.LastNote}>
 				<h2>{lastNote?.date.slice(0,16)}</h2>
 				<p>
 					&emsp;
@@ -54,7 +47,7 @@ export const Home = () => {
 				</p>
 				<span className={styles.Corner_first}/>
 				<span className={styles.Corner_second}/>
-			</article>
+			</Link>
 		</div>
 		</>
 	);

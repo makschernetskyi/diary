@@ -6,6 +6,11 @@ export const createCalendar = () => {
 	const WIDTH = canvas.width
   
 	const HEIGHT = canvas.height
+
+
+	ctx.strokeStyle = "#000000"
+	ctx.lineWidth = 2
+	ctx.font = "100px Rubik"
   
 	const Calendar = [...new Array(6)].map(() => new Array(7))
   
@@ -21,10 +26,6 @@ export const createCalendar = () => {
 	const daysInCurrentMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
   
   
-	ctx.strokeStyle = "#000000"
-	ctx.lineWidth = 2
-	ctx.font = "100px Calibri"
-  
 	fillCalendar(Calendar, firstDayInCurrentMonth, daysInCurrentMonth)
 	renderCalendar(ctx, WIDTH, HEIGHT, Calendar)
 }
@@ -37,7 +38,10 @@ function renderCalendar(ctx, WIDTH, HEIGHT, Calendar){
 	const step = Math.floor(WIDTH/7)
 	//const drawGridConfigured = curry(drawGrid, ctx, WIDTH, HEIGHT)
 	const drawCellConfigured = curry(drawCell, ctx, step)
+
+	ctx.clearRect(0,0,WIDTH,HEIGHT)
 	//drawGridConfigured(step)
+	
 	for(let i = 0; i<6; i++){
 		for(let j = 0; j<7; j++){
 			if(Calendar[i][j]){
