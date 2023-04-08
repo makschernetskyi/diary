@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { deleteNote, fetchNote, resetState } from '../../Redux/slices/note/noteSlice';
 
 import { Header } from '../Header'
+import {Error} from '../ErrorModal'
 import styles from './Note.module.sass'
 
 
@@ -70,6 +71,7 @@ export const Note = () => {
         {note?.text}
       </div>
     </div>
+    <Error message={error?'wrong login data':''}/>
     </>
   )
 }

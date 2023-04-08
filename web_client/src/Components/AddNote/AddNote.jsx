@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 
 import { Header } from '../Header'
+import { Error } from '../ErrorModal';
 import styles from './AddNote.module.sass'
 import { useDispatch, useSelector } from 'react-redux';
 import { postNote, resetState, updateDate, updateLocation, updateText } from '../../Redux/slices/addNote/addNoteSlice';
@@ -43,19 +44,19 @@ export const AddNote = () => {
   useEffect(()=>{
     if(error=="unauthorized")
       navigate('/login')
-    return ()=>{
-      dispatch(resetState())
-    }
   },[error])
 
   useEffect(()=>{
     if(status=="resolved"){
       navigate('/notes')
     }
+  },[status])
+
+  useEffect(()=>{
     return ()=>{
       dispatch(resetState())
     }
-  },[status])
+  },[])
 
 
 
@@ -71,6 +72,7 @@ export const AddNote = () => {
       <textarea value={text} onChange={handleTextInput} className={styles.AddNote_Content} ref={contentInputRef} placeholder='my new note...' autoFocus>
       </textarea>
     </div>
+    <Error message={error?'wrong login data':''}/>
     </>
   )
 }

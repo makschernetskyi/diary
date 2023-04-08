@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import { Header } from '../Header';
 import { Calendar } from './Calendar';
+import { Error } from '../ErrorModal';
 
 import styles from './Home.module.sass'
 
@@ -49,6 +50,7 @@ export const Home = () => {
 				<span className={styles.Corner_second}/>
 			</Link>
 		</div>
+		<Error message={error?'wrong login data':''}/>
 		</>
 	);
 }

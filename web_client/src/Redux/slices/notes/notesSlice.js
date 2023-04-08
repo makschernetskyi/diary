@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 export const fetchNotes = createAsyncThunk(
-	'fetchNotes',
+	'notes/fetchNotes',
 	async (source, {rejectWithValue})=>{
 		try{
 			const response = await axios({

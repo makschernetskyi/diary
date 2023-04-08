@@ -1,13 +1,25 @@
+$selection-color: #24acf2
+$bg-color: #FFFCF1
+	
+	
 *
 	margin: 0
 	padding: 0
 	box-sizing: border-box
 
 
+*::selection
+	background: $selection-color
+
+
+
+
+
 html,body,#root
 	width: 100%
 	height: 100%
 	overflow: hidden
+	background: $bg-color
 
 @font-face 
 	font-family: Alkatra

@@ -48,17 +48,11 @@ export const EditNote = () => {
   useEffect(()=>{
     if(error=="unauthorized")
       navigate('/login')
-    return ()=>{
-      dispatch(resetState())
-    }
   },[error])
 
   useEffect(()=>{
     if(update_status=="resolved"){
       navigate('/notes')
-    }
-    return ()=>{
-      dispatch(resetState())
     }
   },[update_status])
 
@@ -73,6 +67,12 @@ export const EditNote = () => {
       source.cancel()
     }
   },[dispatch])
+
+  useEffect(()=>{
+    return ()=>{
+      dispatch(resetState())
+    }
+  },[])
 
 
 

@@ -10,7 +10,7 @@ const initialState = {
 }
 
 export const fetchLastNote = createAsyncThunk(
-	'fetchLastNote',
+	'home/fetchLastNote',
 	async (source, {rejectWithValue})=>{
 		try{
 			const response = await axios({

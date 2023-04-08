@@ -6,6 +6,7 @@ import styles from './Notes.module.sass'
 import { fetchNotes } from '../../Redux/slices/notes/notesSlice';
 import { NotePreview } from './NotePreview';
 import { Header } from '../Header';
+import { Error } from '../ErrorModal';
 
 
 
@@ -100,6 +101,7 @@ export const Notes = () => {
 		<div className={styles.NotesPage}>
 			{React.Children.toArray(generateNotesSections(notesList))}
 		</div>
+		<Error message={error?'wrong login data':''}/>
 		</>
 	)
 }
