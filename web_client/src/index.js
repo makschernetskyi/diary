@@ -10,14 +10,9 @@ import {App} from './Components/App'
 
 const root = createRoot(document.getElementById('root'))
 
-const rerenderEntireTree = () =>{
-	root.render(
-		<Provider store = { store }>
-				<App/>
-		</Provider>
-		
-	);
-}
 
-
-rerenderEntireTree()
+root.render(
+	<Provider store = { store }>
+			<App/>
+	</Provider>
+);
