@@ -1,7 +1,7 @@
-#Diary
+<h1>Diary</h1>
 this app is just a digital diary that consists of chronologically grouped notes
 <br/>
-##Preview:
+<h2>Preview:</h2>
 <br/>
 <img src="ui_preview/login.jpg" width="400px">
 <br/>
@@ -12,13 +12,15 @@ this app is just a digital diary that consists of chronologically grouped notes
 <img src="ui_preview/note.jpg" width="400px">
 <br/>
 <hr/>
-##How to set it up?
+<h2>How to set it up?</h2>
 <br/>
-1. Clone this repo
-2. connect server to your database
-3. build web client with     yarn webpack build
-6. install requirements from server/requirements.txt
-4. run the server with flask     flask run
-6. use it!
+<ol>
+<li>Clone this repo</li>
+<li>connect server to your database</li>
+<li>build web client with     yarn webpack build</li>
+<li>install requirements from server/requirements.txt</li>
+<li>run the server with flask     flask run</li>
+<li> use it!</li>
+</ol>
 
 
